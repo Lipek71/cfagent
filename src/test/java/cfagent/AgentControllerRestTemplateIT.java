@@ -7,6 +7,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Sql(statements = "delete from agent")
+@Sql(statements = "delete from agents")
 public class AgentControllerRestTemplateIT {
 
     @Autowired
@@ -41,13 +42,13 @@ public class AgentControllerRestTemplateIT {
     }
 
     @Test()
-    void deleteAgentTest() {
+    void updateAgentTest() {
 
         AgentDTO agentDTO = template.postForObject("/api/cfagent/agent", new CreateAgentCommand("John Doe", "12345123451") , AgentDTO.class);
 
         assertEquals("John Doe", agentDTO.getName());
 
-        template.postForObject("/api/cfagent/agent", new CreateAgentCommand("Jane Doe", "12345123452") , AgentDTO.class);
+        template.put("/api/cfagent/agent/" + agentDTO.getId(), new UpdateAgentCommand("Jane Doe", "12345123452", false) , AgentDTO.class);
 
         List<AgentDTO> agentDTOList = template.exchange("/api/cfagent/agent",
                         HttpMethod.GET,
@@ -55,23 +56,9 @@ public class AgentControllerRestTemplateIT {
                         new ParameterizedTypeReference<List<AgentDTO>>() {})
                 .getBody();
 
-        template.delete("/api/cfagent/agent/2");
-
         assertThat(agentDTOList)
                 .extracting(AgentDTO::getName)
-                .contains("John Doe", "Jane Doe");
-    }
-
-    @Test()
-    void updateAgentTest() {
-
-        AgentDTO agentDTO = template.postForObject("/api/cfagent/agent", new CreateAgentCommand("John Doe", "12345123451") , AgentDTO.class);
-
-        assertEquals("John Doe", agentDTO.getName());
-
-        template.put("/api/cfagent/agent", new UpdateAgentCommand("Jane Doe", "12345123452", false) , AgentDTO.class);
-
-        assertEquals("John Doe", agentDTO.getName());
+                .containsExactly("Jane Doe");
 
     }
 }

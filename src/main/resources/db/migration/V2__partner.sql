@@ -1,0 +1,1 @@
+create table partners (id bigint auto_increment, name varchar(255), company tinyint(1), address_id bigint, agent_id bigint, insurence_id bigint, active tinyint(1), primary key (id));
