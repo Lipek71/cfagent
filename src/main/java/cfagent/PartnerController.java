@@ -20,35 +20,35 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("api/cfagent/agent")
-@Tag(name = "Operations on agent")
-public class AgentController {
+@RequestMapping("api/cfagent/partner")
+@Tag(name = "Operations on partner")
+public class PartnerController {
 
-    final private AgentService agentService;
+    final private PartnerService partnerService;
 
-    public AgentController(AgentService agentService) {
-        this.agentService = agentService;
+    public PartnerController(PartnerService partnerService) {
+        this.partnerService = partnerService;
     }
 
     @GetMapping
-    @Operation(summary = "List conditioned agents.")
-    public List<AgentDTO> listAgents(@RequestParam Optional<String> name) {
-        return agentService.listAgents(name);
+    @Operation(summary = "List conditioned partners.")
+    public List<PartnerDTO> listPartners(@RequestParam Optional<String> name) {
+        return partnerService.listPartners(name);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @Operation(summary = "Create an agent.")
-    @ApiResponse(responseCode = "201", description = "Agent has been created.")
-    public AgentDTO createAgent(@Valid @RequestBody CreateAgentCommand command){
-        return agentService.createAgent(command);
+    @Operation(summary = "Create a partner.")
+    @ApiResponse(responseCode = "201", description = "Partner has been created.")
+    public PartnerDTO createPartner(@Valid @RequestBody CreatePartnerCommand command) {
+        return partnerService.createPartner(command);
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update an agent.")
+    @Operation(summary = "Update a partner.")
     @Transactional
-    public AgentDTO updateAgent(@PathVariable("id") long id, @Valid @RequestBody UpdateAgentCommand command) {
-        return agentService.updateAgent(id, command);
+    public PartnerDTO updateAgent(@PathVariable("id") long id, @Valid @RequestBody UpdatePartnerCommand command) {
+        return partnerService.updatePartner(id, command);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
@@ -88,5 +88,4 @@ public class AgentController {
                 .contentType(MediaType.APPLICATION_PROBLEM_JSON)
                 .body(problem);
     }
-
 }

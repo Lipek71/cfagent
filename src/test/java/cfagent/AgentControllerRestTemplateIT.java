@@ -21,15 +21,15 @@ public class AgentControllerRestTemplateIT {
     TestRestTemplate template;
 
     @Test()
-    void listTrainingClassTest() {
+    void listAgentTest() {
 
-        AgentDTO agentDTO = template.postForObject("/api/cfagent", new CreateAgentCommand("John Doe", "12345123451") , AgentDTO.class);
+        AgentDTO agentDTO = template.postForObject("/api/cfagent/agent", new CreateAgentCommand("John Doe", "12345123451") , AgentDTO.class);
 
         assertEquals("John Doe", agentDTO.getName());
 
-        template.postForObject("/api/cfagent", new CreateAgentCommand("Jane Doe", "12345123452") , AgentDTO.class);
+        template.postForObject("/api/cfagent/agent", new CreateAgentCommand("Jane Doe", "12345123452") , AgentDTO.class);
 
-        List<AgentDTO> agentDTOList = template.exchange("/api/cfagent",
+        List<AgentDTO> agentDTOList = template.exchange("/api/cfagent/agent",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<AgentDTO>>() {})
@@ -41,21 +41,21 @@ public class AgentControllerRestTemplateIT {
     }
 
     @Test()
-    void deleteTrainingClassTest() {
+    void deleteAgentTest() {
 
-        AgentDTO agentDTO = template.postForObject("/api/cfagent", new CreateAgentCommand("John Doe", "12345123451") , AgentDTO.class);
+        AgentDTO agentDTO = template.postForObject("/api/cfagent/agent", new CreateAgentCommand("John Doe", "12345123451") , AgentDTO.class);
 
         assertEquals("John Doe", agentDTO.getName());
 
-        template.postForObject("/api/cfagent", new CreateAgentCommand("Jane Doe", "12345123452") , AgentDTO.class);
+        template.postForObject("/api/cfagent/agent", new CreateAgentCommand("Jane Doe", "12345123452") , AgentDTO.class);
 
-        List<AgentDTO> agentDTOList = template.exchange("/api/cfagent",
+        List<AgentDTO> agentDTOList = template.exchange("/api/cfagent/agent",
                         HttpMethod.GET,
                         null,
                         new ParameterizedTypeReference<List<AgentDTO>>() {})
                 .getBody();
 
-        template.delete("/api/cfagent/2");
+        template.delete("/api/cfagent/agent/2");
 
         assertThat(agentDTOList)
                 .extracting(AgentDTO::getName)
@@ -63,13 +63,13 @@ public class AgentControllerRestTemplateIT {
     }
 
     @Test()
-    void updateTrainingClassTest() {
+    void updateAgentTest() {
 
-        AgentDTO agentDTO = template.postForObject("/api/cfagent", new CreateAgentCommand("John Doe", "12345123451") , AgentDTO.class);
+        AgentDTO agentDTO = template.postForObject("/api/cfagent/agent", new CreateAgentCommand("John Doe", "12345123451") , AgentDTO.class);
 
         assertEquals("John Doe", agentDTO.getName());
 
-        template.put("/api/cfagent", new UpdateAgentCommand("Jane Doe", "12345123452", false) , AgentDTO.class);
+        template.put("/api/cfagent/agent", new UpdateAgentCommand("Jane Doe", "12345123452", false) , AgentDTO.class);
 
         assertEquals("John Doe", agentDTO.getName());
 
