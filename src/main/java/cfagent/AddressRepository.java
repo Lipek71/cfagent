@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.Table;
 
 @Repository
-@Table(name = "agents")
-public interface AgentRepository extends JpaRepository<Agent, Long> {
+@Table(name = "addresses")
+public interface AddressRepository extends JpaRepository<Address, Long> {
 }

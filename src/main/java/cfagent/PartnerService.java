@@ -3,6 +3,7 @@ package cfagent;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +35,7 @@ public class PartnerService {
         return modelMapper.map(partner, PartnerDTO.class);
     }
 
+    @Transactional
     public PartnerDTO updatePartner(long id, UpdatePartnerCommand command) {
         Partner partner = partnerRepository.getById(id);
         if(partner == null){
@@ -49,5 +51,15 @@ public class PartnerService {
 
         }
         return modelMapper.map(partner, PartnerDTO.class);
+    }
+
+    @Transactional
+    public void deletePartner(long id) {
+        Partner partner = partnerRepository.getById(id);
+        if(partner == null){
+            throw new IllegalArgumentException("Training class not found!" + id);
+        }
+        partnerRepository.deleteById(id);
+
     }
 }

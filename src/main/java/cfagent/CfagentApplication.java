@@ -24,11 +24,6 @@ public class CfagentApplication {
     }
 
     @Bean
-    public ObjectMapper objectMapper(){
-        return new ObjectMapper().findAndRegisterModules();
-    }
-
-    @Bean
     public OpenAPI customOpenAPI(){
         return new OpenAPI()
                 .info(new Info()

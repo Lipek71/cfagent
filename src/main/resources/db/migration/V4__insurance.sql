@@ -1,0 +1,1 @@
+create table insurances (id bigint auto_increment, company varchar(255), type varchar(255), insurance varchar(255), active tinyint(1), primary key (id));

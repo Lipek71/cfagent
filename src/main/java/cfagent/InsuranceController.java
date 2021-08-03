@@ -19,34 +19,34 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("api/cfagent/agent")
-@Tag(name = "Operations on agents.")
-public class AgentController {
+@RequestMapping("api/cfagent/insurance")
+@Tag(name = "Operations on insurances")
+public class InsuranceController {
 
-    final private AgentService agentService;
+    final private InsuranceService insuranceService;
 
-    public AgentController(AgentService agentService) {
-        this.agentService = agentService;
+    public InsuranceController(InsuranceService insuranceService) {
+        this.insuranceService = insuranceService;
     }
 
     @GetMapping
-    @Operation(summary = "List conditioned agents.")
-    public List<AgentDTO> listAgents(@RequestParam Optional<String> name) {
-        return agentService.listAgents(name);
+    @Operation(summary = "List conditioned insurances.")
+    public List<InsuranceDTO> listAgents(@RequestParam Optional<String> company, @RequestParam Optional<String> type, @RequestParam Optional<String> insurance) {
+        return insuranceService.listInsurances(company, type, insurance);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @Operation(summary = "Create an agent.")
-    @ApiResponse(responseCode = "201", description = "Agent has been created.")
-    public AgentDTO createAgent(@Valid @RequestBody CreateAgentCommand command){
-        return agentService.createAgent(command);
+    @Operation(summary = "Create an insurence.")
+    @ApiResponse(responseCode = "201", description = "Insurence has been created.")
+    public InsuranceDTO createInsurance(@Valid @RequestBody CreateInsuranceCommand command){
+        return insuranceService.createInsurance(command);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update an agent.")
-    public AgentDTO updateAgent(@PathVariable("id") long id, @Valid @RequestBody UpdateAgentCommand command) {
-        return agentService.updateAgent(id, command);
+    public InsuranceDTO updateInsurance(@PathVariable("id") long id, @Valid @RequestBody UpdateInsuranceCommand command) {
+        return insuranceService.updateInsurance(id, command);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
@@ -54,7 +54,7 @@ public class AgentController {
     public ResponseEntity<Problem> handleNotFound(IllegalArgumentException iae) {
         Problem problem =
                 Problem.builder()
-                        .withType(URI.create("agent/not-found"))
+                        .withType(URI.create("insurance/not-found"))
                         .withTitle("Not found")
                         .withStatus(Status.NOT_FOUND)
                         .withDetail(iae.getMessage())

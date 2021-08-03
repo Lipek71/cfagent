@@ -8,11 +8,14 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
+import org.zalando.problem.Problem;
+import org.zalando.problem.Status;
 
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql(statements = "delete from agents")
@@ -60,5 +63,12 @@ public class AgentControllerRestTemplateIT {
                 .extracting(AgentDTO::getName)
                 .containsExactly("Jane Doe");
 
+    }
+
+    @Test
+    void exeptionAgentTest(){
+        Problem problem = template.postForObject("/api/cfagent/agent", new CreateAgentCommand("", "12345123451") , Problem.class);
+
+        assertEquals(Status.BAD_REQUEST, problem.getStatus());
     }
 }

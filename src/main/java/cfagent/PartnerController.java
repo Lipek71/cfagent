@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.zalando.problem.Problem;
@@ -45,11 +44,17 @@ public class PartnerController {
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update a partner.")
-    @Transactional
+    @Operation(summary = "Update a partners.")
     public PartnerDTO updateAgent(@PathVariable("id") long id, @Valid @RequestBody UpdatePartnerCommand command) {
         return partnerService.updatePartner(id, command);
     }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete a partner.")
+    public void deletePartner(@PathVariable("id") long id){
+        partnerService.deletePartner(id);
+    }
+
 
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -67,25 +72,4 @@ public class PartnerController {
                 .body(problem);
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Problem> handleValidException(MethodArgumentNotValidException e) {
-        List<Violation> violations =
-                e.getBindingResult().getFieldErrors().stream()
-                        .map(fe -> new Violation(fe.getField(), fe.getDefaultMessage()))
-                        .collect(Collectors.toList());
-
-        Problem problem =
-                Problem.builder()
-                        .withType(URI.create("agent/not-valid"))
-                        .withTitle("Validation error")
-                        .withStatus(Status.BAD_REQUEST)
-                        .withDetail(e.getMessage())
-                        .with("violations", violations)
-                        .build();
-
-        return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .contentType(MediaType.APPLICATION_PROBLEM_JSON)
-                .body(problem);
-    }
 }

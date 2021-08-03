@@ -1,0 +1,1 @@
+create table addresses (id bigint auto_increment, postcode varchar(255), city varchar(255), street varchar(255), primary key (id));

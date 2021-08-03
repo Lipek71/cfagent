@@ -3,6 +3,7 @@ package cfagent;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +34,7 @@ public class AgentService {
         return modelMapper.map(agent, AgentDTO.class);
     }
 
+    @Transactional
     public AgentDTO updateAgent(long id, UpdateAgentCommand command) {
         Agent agent = agentRepository.getById(id);
         if(agent == null){

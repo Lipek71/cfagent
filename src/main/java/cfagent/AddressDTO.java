@@ -7,9 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Violation {
+public class AddressDTO {
 
-    private String field;
+    private Long id;
 
-    private String message;
+    private String postcode;
+
+    private String city;
+
+    private String street;
 }
