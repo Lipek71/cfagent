@@ -1,4 +1,6 @@
-package cfagent;
+package cfagent.insurance;
+import cfagent.agent.Agent;
+import cfagent.partner.Partner;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +30,10 @@ public class Insurance {
 
     @Column(name = "active")
     private boolean active;
+
+    @ManyToOne
+    @JoinColumn(name = "partner_id")
+    private Partner partner;
 
     public Insurance(String company, String type, String insurance, boolean active) {
         this.company = company;

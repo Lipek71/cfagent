@@ -1,5 +1,8 @@
 package cfagent;
 
+import cfagent.address.AddressDTO;
+import cfagent.address.CreateAddressCommand;
+import cfagent.address.UpdateAddressCommand;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,5 +1,7 @@
-package cfagent;
+package cfagent.address;
 
+import cfagent.agent.Agent;
+import cfagent.partner.Partner;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +27,10 @@ public class Address {
 
     @Column(name = "street")
     private String street;
+
+    @ManyToOne
+    @JoinColumn(name = "partner_id")
+    private Partner partner;
 
     public Address(String postcode, String city, String street) {
         this.postcode = postcode;

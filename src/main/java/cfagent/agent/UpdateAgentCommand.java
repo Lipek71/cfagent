@@ -1,4 +1,4 @@
-package cfagent;
+package cfagent.agent;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateAgentCommand {
+public class UpdateAgentCommand {
 
     @Schema(description = "Agent name", example = "Lipka László")
     @NotBlank
@@ -23,4 +23,6 @@ public class CreateAgentCommand {
     @Size(min = 11, max = 11, message = "Size is 11")
     private String mnbNumber;
 
+    @Schema(description = "Agent status", example = "true")
+    private boolean active;
 }

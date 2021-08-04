@@ -1,12 +1,13 @@
 package cfagent;
 
+import cfagent.partner.Partner;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PartnerTest {
 
-    Partner partner = new Partner(1L, "John Doe", false, null, 1L, null, true );
+    Partner partner = new Partner(1L, "John Doe", false, true, null, null, null );
 
     @Test
     void getterTest() {

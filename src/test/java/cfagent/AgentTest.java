@@ -1,12 +1,13 @@
 package cfagent;
 
+import cfagent.agent.Agent;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AgentTest {
 
-    Agent agent = new Agent(1L, "John Doe", "12345678901", true);
+    Agent agent = new Agent(1L, "John Doe", "12345678901", true, null);
 
     @Test
     void getterTest() {

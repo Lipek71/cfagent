@@ -1,4 +1,4 @@
-package cfagent;
+package cfagent.address;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -6,47 +6,44 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.zalando.problem.Problem;
 import org.zalando.problem.Status;
-import org.zalando.problem.violations.Violation;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("api/cfagent/agent")
-@Tag(name = "Operations on agents.")
-public class AgentController {
+@RequestMapping("api/cfagent/address")
+@Tag(name = "Operations on addresses.")
+public class AddressController {
 
-    final private AgentService agentService;
+    final private AddressService addressService;
 
-    public AgentController(AgentService agentService) {
-        this.agentService = agentService;
+    public AddressController(AddressService addressService) {
+        this.addressService = addressService;
     }
 
     @GetMapping
-    @Operation(summary = "List conditioned agents.")
-    public List<AgentDTO> listAgents(@RequestParam Optional<String> name) {
-        return agentService.listAgents(name);
+    @Operation(summary = "List conditioned addresses.")
+    public List<AddressDTO> listAddresses(@RequestParam Optional<String> postcode, @RequestParam Optional<String> city, @RequestParam Optional<String> street) {
+        return addressService.listAdresses(postcode, city, street);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @Operation(summary = "Create an agent.")
+    @Operation(summary = "Create an address.")
     @ApiResponse(responseCode = "201", description = "Agent has been created.")
-    public AgentDTO createAgent(@Valid @RequestBody CreateAgentCommand command){
-        return agentService.createAgent(command);
+    public AddressDTO createAgent(@Valid @RequestBody CreateAddressCommand command){
+        return addressService.createAddress(command);
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update an agent.")
-    public AgentDTO updateAgent(@PathVariable("id") long id, @Valid @RequestBody UpdateAgentCommand command) {
-        return agentService.updateAgent(id, command);
+    @Operation(summary = "Update an address.")
+    public AddressDTO updateAgent(@PathVariable("id") long id, @Valid @RequestBody UpdateAddressCommand command) {
+        return addressService.updateAddress(id, command);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
@@ -54,7 +51,7 @@ public class AgentController {
     public ResponseEntity<Problem> handleNotFound(IllegalArgumentException iae) {
         Problem problem =
                 Problem.builder()
-                        .withType(URI.create("agent/not-found"))
+                        .withType(URI.create("address/not-found"))
                         .withTitle("Not found")
                         .withStatus(Status.NOT_FOUND)
                         .withDetail(iae.getMessage())

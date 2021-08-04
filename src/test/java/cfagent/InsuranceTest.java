@@ -1,5 +1,6 @@
 package cfagent;
 
+import cfagent.insurance.Insurance;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -7,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InsuranceTest {
 
-    Insurance insurance = new Insurance(1L, "Allianz Biztosító Zrt.", "vagyonbiztosítás", "Autóm CASCO", true);
+    Insurance insurance = new Insurance(1L, "Allianz Biztosító Zrt.", "vagyonbiztosítás", "Autóm CASCO", true, null);
 
     @Test
     void getterTest() {

@@ -1,11 +1,13 @@
 package cfagent;
 
+import cfagent.partner.CreatePartnerCommand;
+import cfagent.partner.PartnerDTO;
+import cfagent.partner.UpdatePartnerCommand;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.jdbc.Sql;
 import org.zalando.problem.Problem;

@@ -1,22 +1,21 @@
-package cfagent;
+package cfagent.partner;
 
+import cfagent.agent.AddPartnerCommand;
+import cfagent.agent.AgentDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.zalando.problem.Problem;
 import org.zalando.problem.Status;
-import org.zalando.problem.violations.Violation;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/cfagent/partner")
@@ -41,6 +40,18 @@ public class PartnerController {
     @ApiResponse(responseCode = "201", description = "Partner has been created.")
     public PartnerDTO createPartner(@Valid @RequestBody CreatePartnerCommand command) {
         return partnerService.createPartner(command);
+    }
+
+    @PostMapping("address/{id}")
+    @Operation(summary = "Add an address by id.")
+    public PartnerDTO addAddressToPartner(@PathVariable("id") long id, AddAddressCommand command){
+        return partnerService.addAddressToPartner(id, command);
+    }
+
+    @PostMapping("insurance/{id}")
+    @Operation(summary = "Add an insurance by id.")
+    public PartnerDTO addInsuranceToPartner(@PathVariable("id") long id, AddInsuranceCommand command){
+        return partnerService.addInsuranceToPartner(id, command);
     }
 
     @PutMapping("/{id}")

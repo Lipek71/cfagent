@@ -1,4 +1,4 @@
-package cfagent;
+package cfagent.insurance;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

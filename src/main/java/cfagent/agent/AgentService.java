@@ -1,5 +1,6 @@
-package cfagent;
+package cfagent.agent;
 
+import cfagent.partner.Partner;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -52,6 +53,13 @@ public class AgentService {
         return modelMapper.map(agent, AgentDTO.class);
     }
 
+    @Transactional
+    public AgentDTO addPartnerToAgent(long id, AddPartnerCommand command) {
+        Agent agent = agentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Agent not found: " + id));
+        Partner partner = new Partner(command.getName(), command.isCompany());
+        agent.addPartner(partner);
+        return modelMapper.map(agent, AgentDTO.class);
+    }
 }
 
 

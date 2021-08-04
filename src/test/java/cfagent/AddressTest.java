@@ -1,12 +1,13 @@
 package cfagent;
 
+import cfagent.address.Address;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AddressTest {
 
-    Address address = new Address(1L, "2330", "Dunaharaszti", "Szőlőhegy u. 55.");
+    Address address = new Address(1L, "2330", "Dunaharaszti", "Szőlőhegy u. 55.", null);
 
     @Test
     void getterTest() {

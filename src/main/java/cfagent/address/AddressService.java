@@ -1,4 +1,4 @@
-package cfagent;
+package cfagent.address;
 
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;

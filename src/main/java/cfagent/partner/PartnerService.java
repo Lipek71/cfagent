@@ -1,5 +1,8 @@
-package cfagent;
+package cfagent.partner;
 
+import cfagent.address.Address;
+import cfagent.agent.AgentDTO;
+import cfagent.insurance.Insurance;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -61,5 +64,21 @@ public class PartnerService {
         }
         partnerRepository.deleteById(id);
 
+    }
+
+    @Transactional
+    public PartnerDTO addAddressToPartner(long id, AddAddressCommand command) {
+        Partner partner = partnerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Partner not found: " + id));
+        Address address = new Address(command.getPostcode(), command.getCity(), command.getStreet());
+        partner.addAddress(address);
+        return modelMapper.map(partner, PartnerDTO.class);
+    }
+
+    @Transactional
+    public PartnerDTO addInsuranceToPartner(long id, AddInsuranceCommand command) {
+        Partner partner = partnerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Partner not found: " + id));
+        Insurance insurance = new Insurance(command.getCompany(), command.getType(), command.getInsurance(), command.isActive());
+        partner.addInsurance(insurance);
+        return modelMapper.map(partner, PartnerDTO.class);
     }
 }
