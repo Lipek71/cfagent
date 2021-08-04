@@ -1,7 +1,5 @@
 package cfagent.partner;
 
-import cfagent.agent.AddPartnerCommand;
-import cfagent.agent.AgentDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -72,7 +70,7 @@ public class PartnerController {
     public ResponseEntity<Problem> handleNotFound(IllegalArgumentException iae) {
         Problem problem =
                 Problem.builder()
-                        .withType(URI.create("agent/not-found"))
+                        .withType(URI.create("partner/not-found"))
                         .withTitle("Not found")
                         .withStatus(Status.NOT_FOUND)
                         .withDetail(iae.getMessage())

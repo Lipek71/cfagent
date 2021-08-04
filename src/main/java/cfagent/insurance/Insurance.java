@@ -1,5 +1,4 @@
 package cfagent.insurance;
-import cfagent.agent.Agent;
 import cfagent.partner.Partner;
 import lombok.AllArgsConstructor;
 import lombok.Data;

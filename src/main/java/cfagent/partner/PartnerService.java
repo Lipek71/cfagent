@@ -1,7 +1,6 @@
 package cfagent.partner;
 
 import cfagent.address.Address;
-import cfagent.agent.AgentDTO;
 import cfagent.insurance.Insurance;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;

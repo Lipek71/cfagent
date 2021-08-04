@@ -1,6 +1,5 @@
 package cfagent;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import org.modelmapper.ModelMapper;
@@ -12,10 +11,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
-public class CfagentApplication {
+public class CfAgentApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CfagentApplication.class, args);
+        SpringApplication.run(CfAgentApplication.class, args);
     }
 
     @Bean

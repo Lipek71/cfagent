@@ -1,6 +1,6 @@
 package cfagent.agent;
 
-import cfagent.partner.Partner;
+import cfagent.partner.PartnerDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,4 +19,6 @@ public class AgentDTO {
     private String mnbNumber;
 
     private boolean active;
+
+    private List<PartnerDTO> partners;
 }

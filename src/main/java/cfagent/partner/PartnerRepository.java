@@ -8,4 +8,6 @@ import javax.persistence.Table;
 @Repository
 @Table(name = "partners")
 public interface PartnerRepository extends JpaRepository<Partner, Long> {
+
+
 }

@@ -1,15 +1,10 @@
 package cfagent.partner;
 
-import cfagent.address.Address;
-import cfagent.agent.Agent;
-import cfagent.insurance.Insurance;
+import cfagent.insurance.InsuranceDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
 import java.util.List;
 
 @Data
@@ -24,4 +19,6 @@ public class PartnerDTO {
     private boolean company;
 
     private boolean active;
+
+    private List<InsuranceDTO> insurances;
 }

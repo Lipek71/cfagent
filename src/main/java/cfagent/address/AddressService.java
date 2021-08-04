@@ -38,7 +38,7 @@ public class AddressService {
     public AddressDTO updateAddress(long id, UpdateAddressCommand command) {
         Address address = addressRepository.getById(id);
         if(address == null){
-            throw new IllegalArgumentException("Adress not found!" + id);
+            throw new IllegalArgumentException("Address not found!" + id);
         }
         if (!address.getPostcode().equals(command.getPostcode())
                 || !address.getCity().equals(command.getCity())
