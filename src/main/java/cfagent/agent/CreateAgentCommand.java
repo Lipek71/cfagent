@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 public class CreateAgentCommand {
 
     @Schema(description = "Agent name", example = "Lipka László")
-    @NotBlank
+    @NotBlank(message = "The name can't empty.")
     private String name;
 
     @Schema(description = "Agent MNB number", example = "12345678901")

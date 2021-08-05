@@ -24,19 +24,19 @@ public class CfAgentController {
     }
 
     @GetMapping("insurance")
-    @Operation(summary = "List insurance company(ies) and its/their insurance(s).")
+    @Operation(summary = "List insurance company(ies) and its/their insurance(s)")
     public List<InsuranceDTO> listInsurances(@RequestParam Optional<String> company) {
         return cfAgentService.listInsurances(company);
     }
 
     @GetMapping("agent")
-    @Operation(summary = "List agent(s) and her/his partner(s) and her/his insurance(s).")
+    @Operation(summary = "List agent(s) and her/his partner(s) and her/his insurance(s)")
     public List<AgentDTO> listPartnersAndInsurances(@RequestParam Optional<String> name) {
         return cfAgentService.listPartnersAndInsurances(name);
     }
 
     @GetMapping("partner")
-    @Operation(summary = "List partner(s) and her/his agent and her/his insurance(s).")
+    @Operation(summary = "List partner(s) and her/his agent and her/his insurance(s)")
     public List<PartnerWithAgentDTO> listPartnerAgentInsurance(@RequestParam Optional<String> name) {
         return cfAgentService.listPartnerAgentInsurance(name);
     }

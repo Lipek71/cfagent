@@ -27,39 +27,39 @@ public class PartnerController {
     }
 
     @GetMapping
-    @Operation(summary = "List conditioned partners.")
+    @Operation(summary = "List conditioned partners")
     public List<PartnerDTO> listPartners(@RequestParam Optional<String> name) {
         return partnerService.listPartners(name);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @Operation(summary = "Create a partner.")
+    @Operation(summary = "Create a partner")
     @ApiResponse(responseCode = "201", description = "Partner has been created.")
     public PartnerDTO createPartner(@Valid @RequestBody CreatePartnerCommand command) {
         return partnerService.createPartner(command);
     }
 
     @PostMapping("address/{id}")
-    @Operation(summary = "Add an address by id.")
+    @Operation(summary = "Add an address by id")
     public PartnerDTO addAddressToPartner(@PathVariable("id") long id, AddAddressCommand command){
         return partnerService.addAddressToPartner(id, command);
     }
 
     @PostMapping("insurance/{id}")
-    @Operation(summary = "Add an insurance by id.")
+    @Operation(summary = "Add an insurance by id")
     public PartnerDTO addInsuranceToPartner(@PathVariable("id") long id, AddInsuranceCommand command){
         return partnerService.addInsuranceToPartner(id, command);
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update a partners.")
+    @Operation(summary = "Update a partner")
     public PartnerDTO updateAgent(@PathVariable("id") long id, @Valid @RequestBody UpdatePartnerCommand command) {
         return partnerService.updatePartner(id, command);
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete a partner.")
+    @Operation(summary = "Delete a partner")
     public void deletePartner(@PathVariable("id") long id){
         partnerService.deletePartner(id);
     }

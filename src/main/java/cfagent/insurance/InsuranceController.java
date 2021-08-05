@@ -27,21 +27,21 @@ public class InsuranceController {
     }
 
     @GetMapping
-    @Operation(summary = "List conditioned insurances.")
+    @Operation(summary = "List conditioned insurances")
     public List<InsuranceDTO> listAgents(@RequestParam Optional<String> company, @RequestParam Optional<String> type, @RequestParam Optional<String> insurance) {
         return insuranceService.listInsurances(company, type, insurance);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @Operation(summary = "Create an insurence.")
+    @Operation(summary = "Create an insurence")
     @ApiResponse(responseCode = "201", description = "Insurence has been created.")
     public InsuranceDTO createInsurance(@Valid @RequestBody CreateInsuranceCommand command){
         return insuranceService.createInsurance(command);
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update an agent.")
+    @Operation(summary = "Update an insurance")
     public InsuranceDTO updateInsurance(@PathVariable("id") long id, @Valid @RequestBody UpdateInsuranceCommand command) {
         return insuranceService.updateInsurance(id, command);
     }

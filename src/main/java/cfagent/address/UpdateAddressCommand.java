@@ -13,14 +13,14 @@ import javax.validation.constraints.NotBlank;
 public class UpdateAddressCommand {
 
     @Schema(description = "Postcode", example = "2330")
-    @NotBlank
+    @NotBlank(message = "The postcode can't empty.")
     private String postcode;
 
     @Schema(description = "City", example = "Dunaharaszti")
-    @NotBlank
+    @NotBlank(message = "The city can't empty.")
     private String city;
 
     @Schema(description = "Street and house number", example = "Szőlőhegy u. 55.")
-    @NotBlank
+    @NotBlank(message = "The street can't empty.")
     private String street;
 }

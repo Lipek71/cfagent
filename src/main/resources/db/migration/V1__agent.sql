@@ -1,1 +1,7 @@
-create table agents (id bigint auto_increment, name varchar(255), mnb_number varchar(255), active tinyint(1), primary key (id));
+CREATE TABLE `agents` (
+                          `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+                          `active` BIT(1) NULL DEFAULT NULL,
+                          `mnb_number` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                          `name` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                          PRIMARY KEY (`id`) USING BTREE
+);

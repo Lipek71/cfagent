@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/cfagent/agent")
-@Tag(name = "Operations on agents.")
+@Tag(name = "Operations on agents")
 public class AgentController {
 
     final private AgentService agentService;
@@ -27,27 +27,27 @@ public class AgentController {
     }
 
     @GetMapping
-    @Operation(summary = "List conditioned agents.")
+    @Operation(summary = "List conditioned agents")
     public List<AgentDTO> listAgents(@RequestParam Optional<String> name) {
         return agentService.listAgents(name);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @Operation(summary = "Create an agent.")
+    @Operation(summary = "Create an agent")
     @ApiResponse(responseCode = "201", description = "Agent has been created.")
     public AgentDTO createAgent(@Valid @RequestBody CreateAgentCommand command){
         return agentService.createAgent(command);
     }
 
     @PostMapping("/{id}")
-    @Operation(summary = "Add a partner by id.")
+    @Operation(summary = "Add a partner by id")
     public AgentDTO addPartnerToAgent(@PathVariable("id") long id, AddPartnerCommand command){
         return agentService.addPartnerToAgent(id, command);
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update an agent.")
+    @Operation(summary = "Update an agent")
     public AgentDTO updateAgent(@PathVariable("id") long id, @Valid @RequestBody UpdateAgentCommand command) {
         return agentService.updateAgent(id, command);
     }

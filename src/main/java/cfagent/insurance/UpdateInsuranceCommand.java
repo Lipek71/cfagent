@@ -13,15 +13,15 @@ import javax.validation.constraints.NotBlank;
 public class UpdateInsuranceCommand {
 
     @Schema(description = "Insurance company", example = "Allianz Biztosító Zrt.")
-    @NotBlank
+    @NotBlank(message = "The company can't empty.")
     private String company;
 
     @Schema(description = "Type", example = "vagyonbiztosítás")
-    @NotBlank
+    @NotBlank(message = "The type can't empty.")
     private String type;
 
     @Schema(description = "Insurance", example = "Autóm CASCO")
-    @NotBlank
+    @NotBlank(message = "The insurance can't empty.")
     private String insurance;
 
     @Schema(description = "Active", example = "true")
