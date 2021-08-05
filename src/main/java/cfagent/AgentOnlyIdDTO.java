@@ -1,6 +1,15 @@
 package cfagent;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class AgentOnlyIdDTO {
 
     private Long id;
+
+    private String name;
 }

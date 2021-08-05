@@ -64,10 +64,20 @@ Cím létrehozása POST /api/cfagent/address\
 Cím(ek) listázása névminta alapján GET /api/cfgent/address\
 Cím módosítása PUT /api/cfagent/address/{id}\
 
+Külön szekcióban kaptak helyett az általános lekérdezések:
+Egy partner ügynöke és biztosításai\
+Minden partner ügynöke és biztosításai\
+Egy ügynök partnerei és biztosításaia\
+Minden ügynök partnere és biztosítása\
+Egy biztosító biztosításai\
+Minden biztosító biztosításai
+
+A megvalósítás egy lekérdezéssel történt, ahol a keresőmező alapján a következő lehetőségek vannak:\
+Üres kereső mező esetén minden adatot lehoz.\
+Részlet esetén azok az adatok jönnek, melyek tartalmazzák az adott mintát.\
+Pontos kitöltés esetén egy eredményt és a hozzá kapcsolódó adatokat hozza le.\
+A kereső mező nem különbözteti meg a kis és nagy betűket.
+
 Az alkalmazás megvalósítása Java Spring Boot keretrendszerben történt.\
 Minden entitás külön Controller-t és Service-t kapott, ezen felül van egy plusz Controller és Service az általános lekérdezések tárolásához.
-
-
-
-
 
