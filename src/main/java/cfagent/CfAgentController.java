@@ -34,4 +34,10 @@ public class CfAgentController {
     public List<AgentDTO> listPartnersAndInsurances(@RequestParam Optional<String> name) {
         return cfAgentService.listPartnersAndInsurances(name);
     }
+
+    @GetMapping("partner")
+    @Operation(summary = "List partner(s) and her/his agent and her/his insurance(s).")
+    public List<PartnerWithAgentDTO> listPartnerAgentInsurance(@RequestParam Optional<String> name) {
+        return cfAgentService.listPartnerAgentInsurance(name);
+    }
 }

@@ -4,6 +4,7 @@ import cfagent.agent.AgentDTO;
 import cfagent.agent.AgentRepository;
 import cfagent.insurance.InsuranceDTO;
 import cfagent.insurance.InsuranceReposity;
+import cfagent.partner.PartnerRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Sort;
@@ -21,6 +22,8 @@ public class CfAgentService {
 
     private AgentRepository agentRepository;
 
+    private PartnerRepository partnerRepository;
+
     private ModelMapper modelMapper;
 
     public List<InsuranceDTO> listInsurances(Optional<String> company) {
@@ -34,6 +37,13 @@ public class CfAgentService {
         return agentRepository.findAll(Sort.by(Sort.Direction.ASC, "name")).stream()
                 .filter(a -> name.isEmpty() || a.getName().toLowerCase().contains(name.get().toLowerCase()))
                 .map(a -> modelMapper.map(a, AgentDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<PartnerWithAgentDTO> listPartnerAgentInsurance(Optional<String> name) {
+        return partnerRepository.getPartnerAgentInsurance().stream()
+                .filter(a -> name.isEmpty() || a.getName().toLowerCase().contains(name.get().toLowerCase()))
+                .map(a -> modelMapper.map(a, PartnerWithAgentDTO.class))
                 .collect(Collectors.toList());
     }
 }
